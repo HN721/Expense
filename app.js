@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const UserRoutes = require("./routes/UserRoutes");
+const CategoryRoute = require("./routes/CategoryRoute");
 const errorHandler = require("./middleware/errorHandler");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,8 @@ mongoose
 app.use(express.json());
 
 app.use("/", UserRoutes);
+app.use("/", CategoryRoute);
+
 //ERROR HANDLER
 app.use(errorHandler);
 // Start the server

@@ -1,6 +1,3 @@
-const User = require("../model/User");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const Category = require("../model/Category");
 const categoryController = {
   create: async (req, res) => {
@@ -13,7 +10,7 @@ const categoryController = {
       throw new Error("Invalid category type" + type);
     }
     //check if category already exits on the user
-    const categoryExits = Category.findOne({
+    const categoryExits = await Category.findOne({
       name: normalizeName,
       user: req.user,
     });
