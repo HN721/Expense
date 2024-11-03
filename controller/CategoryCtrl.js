@@ -29,8 +29,11 @@ const categoryController = {
     });
     res.status(201).json(category);
   },
-  //login
-  list: async (req, res) => {},
+
+  list: async (req, res) => {
+    const categories = await Category.find({ user: req.user });
+    res.status(200).json(categories);
+  },
 
   //profile
   update: async (req, res) => {},
