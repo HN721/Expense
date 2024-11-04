@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const UserRoutes = require("./routes/UserRoutes");
 const CategoryRoute = require("./routes/CategoryRoute");
+const TransactionRoute = require("./routes/TransactionsRoute");
+
 const errorHandler = require("./middleware/errorHandler");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +26,7 @@ app.use(express.json());
 
 app.use("/", UserRoutes);
 app.use("/", CategoryRoute);
+app.use("/", TransactionRoute);
 
 //ERROR HANDLER
 app.use(errorHandler);

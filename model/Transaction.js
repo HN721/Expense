@@ -17,10 +17,10 @@ const transactionSchema = new mongoose.Schema(
       default: "Uncategorized",
     },
     amount: {
-      type: number,
+      type: Number,
       required: true,
     },
-    category: {
+    date: {
       type: Date,
       default: Date.now,
     },
