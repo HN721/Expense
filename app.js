@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const UserRoutes = require("./routes/UserRoutes");
 const CategoryRoute = require("./routes/CategoryRoute");
 const TransactionRoute = require("./routes/TransactionsRoute");
-
+const cors = require("cors");
 const errorHandler = require("./middleware/errorHandler");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +22,10 @@ mongoose
     console.error("Error connecting to MongoDB", err);
   });
 //Route
+const corsOptions = {
+  origin: ["http://localhost:5173"],
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/", UserRoutes);
