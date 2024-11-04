@@ -42,8 +42,26 @@ const transactionController = {
     res.json(transaksis);
   },
 
-  update: async (req, res) => {},
-  delete: async (req, res) => {},
+  update: async (req, res) => {
+    const transaksi = await Transaction.findById(req.params.id);
+    if (transaksi && transaksi.user.toString() === req.user.toString()) {
+      transaksi.type = req.body.type || transaksi.type;
+      transaksi.category = req.body.category || transaksi.category;
+      transaksi.amount = req.body.amount || transaksi.amount;
+      transaksi.date = req.body.date || transaksi.date;
+      transaksi.description = req.body.description || transaksi.description;
+      //update
+      const updateTransaksi = await transaksi.save();
+      res.json(updateTransaksi);
+    }
+  },
+  delete: async (req, res) => {
+    const transaksi = await Transaction.findById(req.params.id);
+    if (transaksi && transaksi.user.toString() === req.user.toString()) {
+      await Transaction.findByIdAndDelete(req.params.id);
+      res.json({ message: "Trnasaki Dihapus" });
+    }
+  },
 };
 
 module.exports = transactionController;
