@@ -31,34 +31,48 @@ const userController = {
   },
   //login
   login: async (req, res) => {
-    const { email, password } = req.body;
-    //if email is correct
-    const user = await User.findOne({ email });
-    if (!user) throw new Error("Invalid Login credential");
-    //compare user password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) throw new Error("Invalid Password");
-    //generate token
-    const token = jwt.sign({ id: user._id }, "H122osea", { expiresIn: "2d" });
-    res.json({
-      message: "LoginSucess",
-      token,
-      id: user._id,
-      email: user.email,
-      username: user.username,
-    });
+    try {
+      const { email, password } = req.body;
+
+      // Check if the user exists by email
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(401).json({ message: "Invalid Login credential" });
+      }
+
+      // Compare user password
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: "Invalid Login credential" });
+      }
+
+      // Generate token
+      const token = jwt.sign({ id: user._id }, "H122osea", { expiresIn: "2d" });
+      return res.json({
+        message: "Login Success",
+        token,
+        id: user._id,
+        email: user.email,
+        username: user.username,
+      });
+    } catch (error) {
+      // Optional: Add a catch block to handle any unexpected errors
+      return res
+        .status(500)
+        .json({ message: "An error occurred during login" });
+    }
   },
 
   //profile
   profile: async (req, res) => {
     const user = await User.findById(req.user);
-    if (!user) throw new Error("User Not Found");
+    if (!user) res.status(401).json({ message: "user NotFound" });
     res.json({ username: user.username, email: user.email });
   },
   changePassword: async (req, res) => {
     const { newPassword } = req.body;
     const user = await User.findById(req.user);
-    if (!user) throw new Error("User Not Found");
+    if (!user) res.status(400).json({ message: "User Not Found" });
     //hash password
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(newPassword, salt);

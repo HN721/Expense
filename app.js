@@ -5,16 +5,17 @@ const CategoryRoute = require("./routes/CategoryRoute");
 const TransactionRoute = require("./routes/TransactionsRoute");
 const cors = require("cors");
 const errorHandler = require("./middleware/errorHandler");
+require("dotenv").config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-// YgW0HsXSTutIG8GH
+
+//yQGsfeEmstknDh2t
 // Middleware
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    "mongodb+srv://hosea1422:YgW0HsXSTutIG8GH@cluster0.2grzr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(process.env.MONGO_DB_URL)
   .then(() => {
     console.log("Connected to MongoDB");
   })
