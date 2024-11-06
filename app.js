@@ -5,7 +5,6 @@ const CategoryRoute = require("./routes/CategoryRoute");
 const TransactionRoute = require("./routes/TransactionsRoute");
 const cors = require("cors");
 const errorHandler = require("./middleware/errorHandler");
-require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +14,9 @@ const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_DB_URL)
+  .connect(
+    "mongodb+srv://hosea1422:yQGsfeEmstknDh2t@tracker.khte6.mongodb.net/?retryWrites=true&w=majority&appName=Tracker"
+  )
   .then(() => {
     console.log("Connected to MongoDB");
   })
