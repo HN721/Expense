@@ -4,19 +4,22 @@ const UserRoutes = require("./routes/UserRoutes");
 const CategoryRoute = require("./routes/CategoryRoute");
 const TransactionRoute = require("./routes/TransactionsRoute");
 const cors = require("cors");
+require("dotenv").config();
+
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 //yQGsfeEmstknDh2t
 // Middleware
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    "mongodb+srv://hosea1422:yQGsfeEmstknDh2t@tracker.khte6.mongodb.net/?retryWrites=true&w=majority&appName=Tracker"
-  )
+  .connect(process.env.MONGO_DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
   })
