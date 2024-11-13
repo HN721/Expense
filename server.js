@@ -27,7 +27,7 @@ mongoose
   });
 //Route
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: ["https://front-end-express.vercel.app/"],
 };
 app.use(cors(corsOptions));
 app.use(express.json());
