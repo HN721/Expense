@@ -27,7 +27,9 @@ mongoose
   });
 //Route
 const corsOptions = {
-  origin: ["http://hn-tracstar.vercel.app"],
+  origin: "https://hn-tracstar.vercel.app", // allow this origin
+  methods: "GET,POST,PUT,DELETE", // Allow required methods
+  allowedHeaders: "Content-Type, Authorization", // Specify allowed headers
 };
 app.use(cors(corsOptions));
 
