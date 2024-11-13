@@ -16,7 +16,9 @@ const PORT = process.env.PORT;
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_DB_URL)
+  .connect(
+    "mongodb+srv://hosea1422:yQGsfeEmstknDh2t@tracker.khte6.mongodb.net/?retryWrites=true&w=majority&appName=Tracker"
+  )
   .then(() => {
     console.log("Connected to MongoDB");
   })
