@@ -29,7 +29,8 @@ mongoose
 const corsOptions = {
   origin: "https://hn-tracstar.vercel.app", // allow this origin
   methods: "GET,POST,PUT,DELETE", // Allow required methods
-  allowedHeaders: "Content-Type, Authorization", // Specify allowed headers
+  allowedHeaders: "Content-Type, Authorization",
+  credentials: true, // Specify allowed headers
 };
 app.use(cors(corsOptions));
 
