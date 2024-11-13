@@ -26,10 +26,12 @@ mongoose
     console.error("Error connecting to MongoDB", err);
   });
 //Route
-const corsOptions = {
-  origin: ["https://front-end-express.vercel.app"],
-};
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "https://front-end-express.vercel.app",
+  })
+);
+
 app.use(express.json());
 
 app.use("/", UserRoutes);
