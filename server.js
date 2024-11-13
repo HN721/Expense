@@ -27,10 +27,7 @@ mongoose
   });
 //Route
 const corsOptions = {
-  origin: [
-    "https://front-end-express.vercel.app",
-    "https://front-end-express-qge7rr01y-hoseas-projects.vercel.app",
-  ],
+  origin: ["http://hn-tracstar.vercel.app"],
 };
 app.use(cors(corsOptions));
 
